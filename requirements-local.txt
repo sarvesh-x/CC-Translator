@@ -1,0 +1,3 @@
+# Install PyTorch's Windows CPU build separately using the command in README.md.
+transformers>=4.38,<5
+sentencepiece>=0.1.99

@@ -1,0 +1,8 @@
+1
+00:00:01,200 --> 00:00:03,000
+What are you doing?
+
+2
+00:00:03,500 --> 00:00:05,200
+<i>Are you kidding me?</i>
+Get out of here!

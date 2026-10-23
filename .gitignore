@@ -1,0 +1,9 @@
+.env
+__pycache__/
+*.py[cod]
+*.log
+.mkv-hindi-translator-tmp/
+*.progress.json
+build/
+dist/
+*.spec

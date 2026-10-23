@@ -1,0 +1,3 @@
+requests>=2.32,<3
+srt>=3.5.3,<4
+# Optional offline engine: py -3.11 -m pip install argostranslate
