@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import json
 import logging
+import os
 import tempfile
 import unittest
 from datetime import timedelta
@@ -12,12 +13,31 @@ from unittest.mock import Mock, patch
 
 import srt
 
+from config import _load_dotenv
 from processor import JobController, process_folder
 from scanner import SubtitleStream, choose_stream, discover_mkv_files
 from subtitle_extractor import extract_srt
 from subtitle_writer import (load_cache, protect_formatting, read_subtitles, restore_formatting,
                              save_cache, write_srt)
 from translator import DeepSeekEngine, TranslationError, LibreTranslateEngine, OllamaQwenEngine, _validate, get_engine
+
+
+class ConfigTests(unittest.TestCase):
+    def test_dotenv_loads_exported_quoted_deepseek_key(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            env_file = Path(tmp) / ".env"
+            env_file.write_text('export DEEPSEEK_API_KEY = "test-key"\n', encoding="utf-8")
+            with patch.dict(os.environ, clear=True):
+                _load_dotenv(env_file)
+                self.assertEqual(os.environ["DEEPSEEK_API_KEY"], "test-key")
+
+    def test_dotenv_does_not_override_existing_environment_key(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            env_file = Path(tmp) / ".env"
+            env_file.write_text("DEEPSEEK_API_KEY=from-file\n", encoding="utf-8")
+            with patch.dict(os.environ, {"DEEPSEEK_API_KEY": "from-environment"}, clear=True):
+                _load_dotenv(env_file)
+                self.assertEqual(os.environ["DEEPSEEK_API_KEY"], "from-environment")
 
 
 class SubtitleTests(unittest.TestCase):
