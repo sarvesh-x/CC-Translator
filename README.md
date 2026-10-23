@@ -15,6 +15,10 @@ The GUI defaults to Qwen3 4B through Ollama, a free Apache-2.0 model that runs l
 
 The application validates provider configuration and the selected language pair before translating. Ollama is checked for a reachable local service and installed model; LibreTranslate's advertised languages and Argos's installed pair are checked directly. DeepSeek does not publish a fixed source/target pair registry through this interface, so the app makes one short greeting translation request and requires Devanagari output before processing; this uses a small amount of API quota. The greeting check only confirms basic capability, so review quality on a sample before a large batch.
 
+
+![alt text](/images/image.png)
+
+
 ## Project layout
 
 ```text
